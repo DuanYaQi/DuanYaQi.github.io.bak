@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="http://www.googlefonts.cn//css?family=Roboto Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://duanyaqi.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.1',
+    exturl: false,
+    sidebar: {"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="165432SLAM十四讲第一次课后作业解答">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SLAM-PA1">
+<meta property="og:url" content="http://duanyaqi.com/2020/02/24/SLAM-PA1/index.html">
+<meta property="og:site_name" content="Duan&#39;s Blog">
+<meta property="og:description" content="165432SLAM十四讲第一次课后作业解答">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://duanyaqi.com/2020/02/24/SLAM-PA1/pic/1573568839421.jpg">
+<meta property="article:published_time" content="2020-02-24T04:59:17.000Z">
+<meta property="article:modified_time" content="2020-02-25T09:21:57.464Z">
+<meta property="article:author" content="Duan">
+<meta property="article:tag" content="SLAM-Practice">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://duanyaqi.com/2020/02/24/SLAM-PA1/pic/1573568839421.jpg">
+
+<link rel="canonical" href="http://duanyaqi.com/2020/02/24/SLAM-PA1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>SLAM-PA1 | Duan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a href="https://github.com/DuanYaQi" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Duan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-fw fa-calendar"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="http://duanyaqi.com/2020/02/24/SLAM-PA1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/sdz.jpg">
+      <meta itemprop="name" content="Duan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Duan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SLAM-PA1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-02-24 12:59:17" itemprop="dateCreated datePublished" datetime="2020-02-24T12:59:17+08:00">2020-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-02-25 17:21:57" itemprop="dateModified" datetime="2020-02-25T17:21:57+08:00">2020-02-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">SLAM</span>
+                  </a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SLAM/Practice/" itemprop="url" rel="index">
+                    <span itemprop="name">Practice</span>
+                  </a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>14 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>165432SLAM十四讲第一次课后作业解答<br><a id="more"></a></p>
+<h2 id="熟悉Linux"><a href="#熟悉Linux" class="headerlink" title="熟悉Linux"></a>熟悉Linux</h2><ol>
+<li><p><strong>如何在 Ubuntu 中安装软件（命令行界面）？它们通常被安装在什么地方？</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">1  下载好.deb包</span></span><br><span class="line">sudo dpkg -i *.deb</span><br><span class="line"><span class="meta">#</span><span class="bash">2  下载好源代码编译安装 readme中有安装步骤</span></span><br><span class="line">sudo tar -zxvf *.tar.gz</span><br><span class="line">cd */</span><br><span class="line">sudo mkdir build</span><br><span class="line">cd build</span><br><span class="line">sudo cmake ..</span><br><span class="line">sudo make(install)</span><br><span class="line"><span class="meta">#</span><span class="bash">3  使用软件包管理工具apt</span></span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get ***</span><br></pre></td></tr></table></figure>
+<p><strong>安装位置</strong>： Linux 通常不是把一个软件安装在一个指定的文件夹里，而是把要安装的软件分布在整个系统的各个文件夹里面。一般 deb 包在<code>/usr/share</code>，个别编译包安装在源文件所在目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/etc 				存放软件配置文件</span><br><span class="line">/lib 				存放软件需要的库文件</span><br><span class="line">/opt 				非开源的商业程序装在此处</span><br><span class="line">/bin 				存放可执行调用程序</span><br><span class="line">/usr 				目录一般存放较多软件重要信息：</span><br><span class="line">/usr/bin 			存放应用程序的可执行文件部分</span><br><span class="line">/usr/lib			存放应用程序的共享动态连接库部分，一些*.so 的文件</span><br><span class="line">/usr/share			存放应用程序需要的字体、图片、文档等资源文件</span><br><span class="line">/usr/src 			存放源代码</span><br><span class="line">/usr/include 		存放开发和编译应用程序需要的头文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>linux 的环境变量是什么？我如何定义新的环境变量？</strong></p>
+<p>​    Linux环境变量是指在操作系统中用来给系统和应用程序设置运行环境的一些参数，如：临时文件夹位置和系统文件夹位置等，它包含了一个或多个应用程序将使用到的信息。</p>
+<p>​    Ubuntu 中存储环境变量文件有, 主要系统配置文件：<code>/etc/profile</code>,<code>/etc/bash.bashrc</code>, <code>/etc/environment</code>; 以 及 主 要 用 户 配 置 文 件 ： <code>~/.profile</code>,<code>~/.bashrc</code>,<code>~/.bash_profile</code>, <code>~/.bash_login</code>, <code>~/.bash_logout</code>, <code>~/.pam_environment</code>。</p>
+<p><strong>设置环境变量有三种方式</strong></p>
+<ul>
+<li>临时设置：<code>export PATH=my_path:$PATH</code></li>
+<li>用户设置：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit ~/.bashrc</span><br><span class="line"><span class="meta">#</span><span class="bash">添加：</span></span><br><span class="line">export PATH=my_path:$PATH</span><br><span class="line">source .bashrc</span><br></pre></td></tr></table></figure>
+<ul>
+<li>系统全局设置：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/profile</span><br><span class="line"><span class="meta">#</span><span class="bash">添加：</span></span><br><span class="line">export PATH=my_path:$PATH</span><br><span class="line">source profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>linux 根目录下面的目录结构是什么样的？至少说出 3 个目录的用途。</strong></p>
+<p>见<a href="# 三层目录/root/usr/var">资料</a></p>
+</li>
+<li><p><strong>假设我要给 a.sh 加上可执行权限，该输入什么命令？</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x a.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>假设我要将 a.sh ⽂件的所有者改成 xiang:xiang，该输入什么命令？</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown xiang:xiang a.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="扩展资料"><a href="#扩展资料" class="headerlink" title="扩展资料"></a>扩展资料</h3><ol>
+<li><p>linux上的软件可以修改源代码，可以自己增加或者减少软件的某些功能</p>
+</li>
+<li><p>判断是否为可执行文件还是script文件，使用file命令，如果可执行，会显示执行文件类别；如果是一般的script，会显示text executables的字样(#!/bin/bash)  或直接显示内容</p>
+</li>
+<li><p>编译过程中会产生所谓的目标文件（.o）    开放源码 .c / 编译程序gcc / 可执行文件.o</p>
+</li>
+<li><p>.GNOME/KDE 两种图形接口</p>
+</li>
+<li><p>注销前关闭所有程序 账号离开系统</p>
+</li>
+<li><p>在 Linux 当中，默认root 的提示字符为 # ，而一般身份用户的提示字符为 $ </p>
+</li>
+<li><p>root 的家目录在/root， 所以 ~ 就代表/root 的意思。而 duan 的家目录在/home/duan， 所以如果你以duan登入时，看到的 ~ 就会等于/home/duan </p>
+</li>
+<li><p>[Ctrl]-d    键盘输入结束(End Of File, EOF 或 End Of Input)的意思！ 可以用来取代 exit 的输入。想要直接离开文字接口，直接按下[Ctrl]-d 直接离开(相当于输入 exit )。</p>
+</li>
+<li><p>Linux 的默认壳程序就是 bash</p>
+</li>
+<li><p>其中^代表的是[ctrl]的意思</p>
+</li>
+<li><p><code>ll  drwx</code> 第一个字符代表这个档案是『目录、档案、链接文件等等』<br>o 当为[ d ]则是目录；<br>o 当为[ - ]则是档案；  纯文本档(ASCII)、二进制文件(binary)、数据格式文件(data)<br>o 若是[ l ]则表示为连结档(link file)；<br>o 若是[ b ]则表示为装置文件里面的可供储存的区块(block)接口设备(可随机存取装置)；<br>o 若是[ c ]则表示为装置文件里面的字符(character)串行端设备，例如键盘、鼠标(一次性读取装置)<br>o 若是[ s ]则表示为资料接口文件(sockets)，最常在/var/run 这个目录中看到这种文件类型了。<br>o 若是[ p ]则表示为数据输送文件(FIFO-first-in-first-out, pipe) 。</p>
+</li>
+<li><p>rwx的三个参数的组合。可读(read)、可写(write)、可执行(execute)。User, Group 及 Others</p>
+<p>第一组为『档案拥有者的权限』、第二组为『同群组的权限』、第三组为『其他非本群组的权限』。</p>
+</li>
+<li><p><strong>查看定义了哪些目录</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $PATH   # 目录是有顺序的    $为变量的符号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加/root到环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH="$PATH":/root</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>alias 是所谓的『命令别名』，意忠是输入 which 会等于后面接的那串指令</p>
+</li>
+<li><p>cd 是『bash 内建的指令』</p>
+</li>
+</ol>
+<hr>
+<h3 id="FHS标准"><a href="#FHS标准" class="headerlink" title="FHS标准"></a>FHS标准</h3><p>Filesystem Hierarchy Standard</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>可分享的(shareable)</th>
+<th>不可分享(unshareable)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不变的(static)</td>
+<td>/usr (软件放置处)</td>
+<td>/etc (配置文件)</td>
+</tr>
+<tr>
+<td></td>
+<td>/opt (第三方协力软件)</td>
+<td>/boot (开机与核心档)</td>
+</tr>
+<tr>
+<td>可变动的(variable)</td>
+<td>/var/mail (使用者邮件信箱)</td>
+<td>/var/run (程序相关)</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/spool/news (新闻组)</td>
+<td>/var/lock (程序相关)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h3 id="三层目录-root-usr-var"><a href="#三层目录-root-usr-var" class="headerlink" title="三层目录/root/usr/var"></a>三层目录/root/usr/var</h3><ul>
+<li>/ (root)：与开机系统有关；</li>
+</ul>
+<p>​    根目录是整个系统最重要的一个目录，因为不但所有的目录都是由根目录衍生出来的， 同时根目录也与开机/还原/系统修复等动作有关。<br>​    由于系统开机时需要特定的开机软件、核心档案、开机所需程序、函式库等等档案数据，若系统出现错误时，根目录也必项要包含有能够修复文件系统的程序才行。<br>​     FHS 标准建议：根目录(/)所在分割槽应该越小越好， 且应用程序所安装的软件最好不要不根目录放在同一个分割槽内，保持根目录越小越好。 不但效能较佳，根目录所在的文件系统也较不容易发生问题</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">目录</th>
+<th style="text-align:center">应放置档案内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>/bin</strong></td>
+<td style="text-align:center">单人维护模式下可以操作的指令:cat、chmod、chown、data</td>
+</tr>
+<tr>
+<td style="text-align:center">/boot</td>
+<td style="text-align:center">放置开机会使用到的档案，如果使用grub还会存在<code>/boot/grub/</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>/dev</strong></td>
+<td style="text-align:center">任何装置与接口设备都是以档案的型态存在于这个目录当中,<br>比要重要的档案有 <code>/dev/tty</code>,  <code>/dev/hd*</code>, <code>/dev/sd**</code>等等</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>/etc</strong></td>
+<td style="text-align:center">系统主要的配置文件几乎都放置在这个目录内,<br>例如人员的账号密码文件、 各种朋务的启始档等等。</td>
+</tr>
+<tr>
+<td style="text-align:center">/home</td>
+<td style="text-align:center">家目录、～:这个用户的家目录、～duan代表duan的家目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>/lib</strong></td>
+<td style="text-align:center">系统的函式库，例如开机使用到的，以及在<code>/bin</code>或/<code>sbin</code>底下的指令会呼叫的函式库。<br>尤其重要的是<code>/lib/modules/</code>这个目录， 因为该目录会放置核心相关的模块(驱动程序)</td>
+</tr>
+<tr>
+<td style="text-align:center">/media</td>
+<td style="text-align:center">放置可移除的装置. 包括软盘、光盘、DVD 等装置都暂时挂载于此。<br>常见的档名有：<code>/media/floppy</code>, <code>/media/cdrom</code>等等</td>
+</tr>
+<tr>
+<td style="text-align:center">/mnt</td>
+<td style="text-align:center">暂时挂载某些额外的装置</td>
+</tr>
+<tr>
+<td style="text-align:center">/opt</td>
+<td style="text-align:center">给第三方协力软件放置的目录。<br>另外，如果你想要自行安装额外的软件(非原本的distribution 提供的)，<br>也能够将你的软件安装到这里来。习惯放置在<code>/usr/local</code> 目录下</td>
+</tr>
+<tr>
+<td style="text-align:center">/root</td>
+<td style="text-align:center">系统管理员(root)的家目录</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>/sbin</strong></td>
+<td style="text-align:center">放在/sbin 底下的为开机过程中所需要的，里面包括了开机、修复、还原系统所需要的指令。 至于某些服务器软件程序，一般则放置到<code>/usr/sbin/</code>当中。<br>本机自行安装的软件所产生系统执行文件(system binary)， 放置到<code>/usr/local/sbin/</code>当中.常见的指令包括：fdisk, fsck, ifconfig, init, mkfs 等等</td>
+</tr>
+<tr>
+<td style="text-align:center">/srv</td>
+<td style="text-align:center">service，是一些网络朋务启动之后，这些朋务所需要取用的数据目彔。 常见的朋务例如 WWW, FTP 等等。WWW 朋务器需要的网页资料就可以放置在<code>/srv/www/</code>里面。</td>
+</tr>
+<tr>
+<td style="text-align:center">/tmp</td>
+<td style="text-align:center">任何人都能够存取的，所以需要定期的清理一下。重要数据不可放置在此目录</td>
+</tr>
+<tr>
+<td style="text-align:center">/lost+found</td>
+<td style="text-align:center">文件系统发生错误时， 将一些遗失的片段放置到这个目录</td>
+</tr>
+<tr>
+<td style="text-align:center">/proc</td>
+<td style="text-align:center">虚拟文件系统(virtual filesystem)、放置的数据都是在内存当中。<br> 例如系统核心、行程信息(process)、周边装置的状态及网络状态等等。<br>本身不占任何硬盘空间</td>
+</tr>
+<tr>
+<td style="text-align:center">/sys</td>
+<td style="text-align:center">与/proc类似。包括目前已加载的核心模块不核心侦测到的硬件装置信息等等。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>/usr (unix software resource)：与<strong>软件安装/执行有关</strong>;也就是『Unix操作系统软件资源』所放置的目录.</p>
+</li>
+<li><p>/var (variable)：与<strong>系统运作过程有关</strong>。主要针对常态性变动的档案，包括快取(cache)、登录档(log file)以及某些软件运作所产生的档案， 包括程序档案(lock file, run file)，或者例如 MySQL 数据库的档案等等.</p>
+</li>
+</ul>
+<hr>
+<h3 id="linux目录结构"><a href="#linux目录结构" class="headerlink" title="linux目录结构"></a><strong>linux目录结构</strong></h3><p><img src="pic/1573568839421.jpg" alt="1573568839421"></p>
+<hr>
+<h2 id="SLAM综述文献阅读"><a href="#SLAM综述文献阅读" class="headerlink" title="SLAM综述文献阅读"></a>SLAM综述文献阅读</h2><ol>
+<li><p><strong>A SLAM expert has to deal with practical aspects ranging from sensor modeling to system integration.</strong></p>
+</li>
+<li><p>SLAM 会在哪些场合中⽤到？⾄少列举三个⽅向。</p>
+<ul>
+<li>自动驾驶（定位建图）</li>
+<li>虚拟现实、增强现实</li>
+<li>三维重建</li>
+<li>室内机器人(扫地机器人)</li>
+</ul>
+</li>
+<li><p>SLAM 中定位与建图是什么关系？为什么在定位的同时需要建图？</p>
+<ul>
+<li>定位和建图是相辅相成、互为依存的关系。</li>
+<li>因为只有高效精确的定位才能构建高效精确的地图，只有高效精确的建图才能得到更精确的定位</li>
+</ul>
+</li>
+<li><p>SLAM 发展历史如何？我们可以将它划分成哪⼏个阶段？</p>
+<p>大致划分为两个阶段：</p>
+<p>a) 1986-2004 年，古典年代，这个阶段从 SLAM 的提出到建立完整的系统，引入了 SLAM概率论推导方法，包括基于扩展卡尔曼滤波、粒子滤波和最大似然估计，同时，面临效率和数据关联鲁棒性问题的挑战；</p>
+<p>b) 2004-2015 年，算法分析年代，这一阶段有许多包括可观测性，收敛性和一致性的SLAM 基本特性研究，理解了稀疏特征在高效 SLAM 解决方案中的重要角色，并且开发了许多开源 SLAM 库。</p>
+</li>
+<li><p>列举三篇在 SLAM 领域的经典⽂献。</p>
+<ul>
+<li>1986 SLAM 的提出<br>R.C. Smith and P. Cheeseman, “On the representation and estimation of spatial uncertainty”, International Journal of Robotics Research, vol.5,4,pp.56-68,1986</li>
+<li>2015 OKVIS: 基于紧耦合和优化的 VI-SLAM 系统框架<br>Stefan Leutenegger, Simon Lynen, Michael Bosse,等. Keyframe-based visual-inertial odometry using nonlinear optimization[J]. International Journal of Robotics Research, 2015, 34(3):314-334</li>
+<li>2017 Maplab: SLAM 领域第一个开源协作 SLAM 框架<br>T. Schneider, M. Dymczyk, M. Fehr, K. Egger, S. Lynen, I. Gilitchenski, and R. Siegwart, “maplab: An open framework for research in visual-inertial mapping and localization (in review),” ICRA, 2018.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="CMake练习"><a href="#CMake练习" class="headerlink" title="CMake练习"></a>CMake练习</h2><h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>书写⼀个由 cmake 组织的 C++ 工程，要求如下：</p>
+<p>① <code>include/hello.h</code> 和 <code>src/hello.c</code> 构成了 libhello.so 库。hello.c 中提供⼀个函数 sayHello()，调⽤此函<br>数时往屏幕输出一行“Hello SLAM”。我们已经为你准备了 hello.h 和 hello.c 这两个文件，见“code/”<br>⽬录下。</p>
+<p>② ⽂件 useHello.c 中含有⼀个 main 函数，它可以编译成⼀个可执行文件，名为“sayhello”。</p>
+<p>③ 默认⽤ Release 模式编译这个⼯程。</p>
+<p>④ 如果用户使用 <code>sudo make install</code>，那么将 hello.h 放⾄<code>/usr/local/include/</code>下，将 libhello.so 放<br>⾄<code>/usr/local/lib/</code>下</p>
+<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><p>主目录CMakeLists.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置Release编译模式</span></span><br><span class="line"><span class="keyword">SET</span>(CMAKE_BUILD_TYPE <span class="string">"Release"</span>)</span><br><span class="line"><span class="keyword">PROJECT</span>(MYHELLO)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加头文件搜索</span></span><br><span class="line"><span class="keyword">INCLUDE_DIRECTORIES</span>(<span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>) <span class="comment">#PROJECT_SOURCE_DIR主目录位置</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#动态库链接</span></span><br><span class="line"><span class="keyword">ADD_LIBRARY</span>(hello SHARED <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/src/hello.cpp) <span class="comment">#hello与hello.cpp链接生成lib+hello+.so</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#安装操作设定位置</span></span><br><span class="line"><span class="keyword">INSTALL</span>(TARGETS hello LIBRARY DESTINATION /usr/local/lib)  <span class="comment">#动态库libhello.so安装至/usr/local/lib</span></span><br><span class="line"><span class="keyword">INSTALL</span>(FILES <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/<span class="keyword">include</span>/hello.h DESTINATION /usr/local/<span class="keyword">include</span>) <span class="comment">#普通文件hello.h安装</span></span><br></pre></td></tr></table></figure>
+<p>src目录下CMakeLists.txt</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#添加可执行文件、库文件并链接</span></span><br><span class="line"><span class="keyword">ADD_EXECUTABLE</span>(sayhello useHello.cpp)</span><br><span class="line"><span class="keyword">TARGET_LINK_LIBRARIES</span>(sayhello hello)<span class="comment">#链接动态库</span></span><br></pre></td></tr></table></figure>
+<p>在build中执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">(sudo)make install</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="ORB-SLAM2"><a href="#ORB-SLAM2" class="headerlink" title="ORB-SLAM2"></a>ORB-SLAM2</h2><p>① <strong>ORB-SLAM2将编译出</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_LIBRARY_OUTPUT_DIRECTORY <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/lib)</span><br><span class="line"><span class="comment">#设定库输出路径为    工程地址/lib</span></span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> SHARED <span class="comment">#共输出1个动态库libORB_SLAM2.so</span></span><br><span class="line">src/System.cc 		<span class="comment">#输出19个库文件System.cc 至Viewer.cc</span></span><br><span class="line">src/Tracking.cc</span><br><span class="line">src/LocalMapping.cc</span><br><span class="line">src/LoopClosing.cc</span><br><span class="line">src/ORBextractor.cc</span><br><span class="line">src/ORBmatcher.cc</span><br><span class="line">src/FrameDrawer.cc</span><br><span class="line">src/Converter.cc</span><br><span class="line">src/MapPoint.cc</span><br><span class="line">src/KeyFrame.cc</span><br><span class="line">src/Map.cc</span><br><span class="line">src/MapDrawer.cc</span><br><span class="line">src/Optimizer.cc</span><br><span class="line">src/PnPsolver.cc</span><br><span class="line">src/Frame.cc</span><br><span class="line">src/KeyFrameDatabase.cc</span><br><span class="line">src/Sim3Solver.cc</span><br><span class="line">src/Initializer.cc</span><br><span class="line">src/Viewer.cc)</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出6个可执行文件rgbd_tum, stereo_kitti, stereo_euroc, mono_tum, mono_kitti, mono_euroc</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_RUNTIME_OUTPUT_DIRECTORY <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Examples/RGB-D)<span class="comment">#可执行目标二进制输出位置设定</span></span><br><span class="line"><span class="keyword">add_executable</span>(rgbd_tum Examples/RGB-D/rgbd_tum.cc)  	<span class="comment">#添加可执行目标二进制文件</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(rgbd_tum <span class="variable">$&#123;PROJECT_NAME&#125;</span>)			<span class="comment">#为目标文件添加需要链接的共享库 有了共享库才能编译.cc文件</span></span><br></pre></td></tr></table></figure>
+<p>② <strong>源码文件夹分布</strong></p>
+<p>​    /src             中是orbslam2的 slam定位建图程序 函数源 库文件</p>
+<p>​    /include     中是orbslam2上述库文件所对应的头文件    </p>
+<p>​    /Examples 中是各个数据集的测试调用程序以及相机标定文件</p>
+<p>③ <strong>可执行文件链接到了哪些库？名字是什么？</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">链接到内部库：</span><br><span class="line"><span class="keyword">add_library</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span> SHARED</span><br><span class="line">src/System.cc</span><br><span class="line">src/Tracking.cc</span><br><span class="line">src/LocalMapping.cc</span><br><span class="line">src/LoopClosing.cc</span><br><span class="line">src/ORBextractor.cc</span><br><span class="line">src/ORBmatcher.cc</span><br><span class="line">src/FrameDrawer.cc</span><br><span class="line">src/Converter.cc</span><br><span class="line">src/MapPoint.cc</span><br><span class="line">src/KeyFrame.cc</span><br><span class="line">src/Map.cc</span><br><span class="line">src/MapDrawer.cc</span><br><span class="line">src/Optimizer.cc</span><br><span class="line">src/PnPsolver.cc</span><br><span class="line">src/Frame.cc</span><br><span class="line">src/KeyFrameDatabase.cc</span><br><span class="line">src/Sim3Solver.cc</span><br><span class="line">src/Initializer.cc</span><br><span class="line">src/Viewer.cc</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">链接到外部库：</span><br><span class="line"><span class="keyword">target_link_libraries</span>(<span class="variable">$&#123;PROJECT_NAME&#125;</span></span><br><span class="line"><span class="variable">$&#123;OpenCV_LIBS&#125;</span></span><br><span class="line"><span class="variable">$&#123;EIGEN3_LIBS&#125;</span></span><br><span class="line"><span class="variable">$&#123;Pangolin_LIBRARIES&#125;</span></span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Thirdparty/DBoW2/lib/libDBoW2.so</span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/Thirdparty/g2o/lib/libg2o.so</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="使用摄像头或视频运行ORB-SLAM2"><a href="#使用摄像头或视频运行ORB-SLAM2" class="headerlink" title="使用摄像头或视频运行ORB-SLAM2"></a>使用摄像头或视频运行ORB-SLAM2</h2><h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><p><a href="https://www.cnblogs.com/mafuqiang/p/6863558.html" target="_blank" rel="noopener">ORB-SLAM2初步（源码逻辑分析）</a>、<a href="https://blog.csdn.net/thornsuge/article/details/70666175" target="_blank" rel="noopener">ORB-slam的配置</a></p>
+<p><strong>Ubuntu16.04下配置ORB-SLAM2</strong></p>
+<p><a href="https://blog.csdn.net/RadiantJeral/article/details/82193370#4_ORB_SLAM2__370" target="_blank" rel="noopener">【SLAM】Ubuntu16.04下配置ORB-SLAM2</a>、<a href="https://blog.csdn.net/learning_tortosie/article/details/79881165" target="_blank" rel="noopener">ORB-SLAM2的安装与运行</a>、<a href="https://blog.csdn.net/u014709760/article/details/85253525" target="_blank" rel="noopener">ORB_SLAM2配置过程</a></p>
+<p><a href="https://blog.csdn.net/sinat_38343378/article/details/78114468" target="_blank" rel="noopener">ORBSLAM2编译运行数据集(亲测可用)</a>、<a href="https://www.jianshu.com/p/ad040b374b2f" target="_blank" rel="noopener">ORB-SLAM2的编译运行以及TUM数据集测试</a></p>
+<p><strong>Ubuntu16.04下配置ORB-SLAM2_with_PointCloud</strong></p>
+<p><a href="https://blog.csdn.net/u011813286/article/details/89096065" target="_blank" rel="noopener">ubuntu16.04编译运行高博的ORBSLAM2_with_pointcloud_map</a></p>
+<p><a href="https://blog.csdn.net/qq_25349629/article/details/88528765" target="_blank" rel="noopener">ORBSLAM2_with_PointCloud编译ROS包并使用kinect2实现室内稠密点云地图创建</a></p>
+<p><a href="https://github.com/gaoxiang12/ORBSLAM2_with_pointcloud_map" target="_blank" rel="noopener">源码地址</a></p>
+<hr>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>① <strong>安装依赖项</strong></p>
+<ul>
+<li><strong>安装Pangolin</strong></li>
+</ul>
+<p>​    Pangolin是对OpenGL进行封装的轻量级的OpenGL输入/输出和视频显示的库。可以用于3D视觉和3D导航的视觉图，可以输入各种类型的视频、并且可以保留视频和输入数据用于debug。</p>
+<p>​    安装Pangolin的依赖项</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libglew-dev</span><br><span class="line">sudo apt-get install libboost-dev libboost-thread-dev libboost-filesystem-dev</span><br><span class="line">sudo apt-get install libpython2.7-dev</span><br></pre></td></tr></table></figure>
+<p>​    下载源代码并编译</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/stevenlovegrove/Pangolin</span><br><span class="line">cd Pangolin</span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make -j4</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>安装opencv</strong></p>
+<p>   <strong>3.4.6</strong></p>
+<p>   <a href="https://www.cnblogs.com/fighting25/p/10687564.html" target="_blank" rel="noopener">ubuntu16.04编译安装opencv3.4.6</a>、<a href="https://blog.csdn.net/Splend520/article/details/97270438" target="_blank" rel="noopener">Ubuntu 16.04 编译安装opencv 3.4.6过程</a>、<a href="https://blog.csdn.net/smile_5me/article/details/96100238" target="_blank" rel="noopener">ubuntu16.04 安装opencv3.4.6</a></p>
+<p>   <strong>3.2.0</strong></p>
+<p>   <a href="https://www.cnblogs.com/Jessey-Ge/p/10872331.html" target="_blank" rel="noopener">Ubuntu16.04+OpenCV3.2.0+Opencv_Contrib3.2.0安装</a>、<a href="https://blog.csdn.net/li_wen01/article/details/71641408" target="_blank" rel="noopener">ubuntu 16.04 OpenCV3.2.0完全编译安装</a></p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">删除build</span></span><br><span class="line">sudo rm -rf *</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删除/usr/<span class="built_in">local</span>/lib下面的libopencvxxx文件</span></span><br><span class="line">sudo rm -rf libopencv*</span><br><span class="line">     </span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=~/Workspace/opencv-3.2.0/opencv_contrib-3.2.0/modules/ -D CUDA_nppi_LIBRARY=true -D WITH_CUDA=OFF -D BUILD_TIFF=ON ..</span><br><span class="line">         </span><br><span class="line">sudo make -j6</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>安装Eigen</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libeigen3-dev</span><br></pre></td></tr></table></figure>
+<p>② <strong>换源并安装ros</strong></p>
+<p>​    <a href="https://blog.csdn.net/cdlwhm1217096231/article/details/95302957" target="_blank" rel="noopener">ubuntu16.04下ROS最新换源方法，解决Hash sum mismatch 问题</a></p>
+<p>​    <a href="https://www.cnblogs.com/BambooEatPanda/p/8638458.html" target="_blank" rel="noopener">ubuntu更改源为aliyun的源ROS改为新加坡源</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ll /etc/lsb-release</span><br><span class="line"><span class="meta">#</span><span class="bash">-rw-r--r-- 1 root root 105 9月  30 21:31 lsb-release</span></span><br><span class="line">chmod 777 lsb-release</span><br><span class="line"></span><br><span class="line">sudo apt-get install ros-kinetic-desktop-full</span><br></pre></td></tr></table></figure>
+<p>③ <strong>安装orb-slam2</strong></p>
+<p>​    <strong>注意需要在cmakelists文件里修改寻找的opencv版本改为自己的版本find_package(OpenCV 3.2.0 QUIET)</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/raulmur/ORB_SLAM2.git</span><br><span class="line">cd ORB_SLAM2</span><br><span class="line">chmod +x build.sh</span><br><span class="line">./build.sh</span><br><span class="line">./build_ros.sh</span><br></pre></td></tr></table></figure>
+<p>④ <strong>配置ros环境下的orbslam</strong></p>
+<p>​    <a href="https://www.jianshu.com/p/dbf39b9e4617" target="_blank" rel="noopener">Ubuntu16.04+Ros+Usb摄像头跑ORB SLAM2</a></p>
+<p>​    <a href="https://www.cnblogs.com/feifanrensheng/p/8995836.html" target="_blank" rel="noopener">ubuntu16.04下用笔记本摄像头和ROS编译运行ORB_SLAM2的单目AR例程</a></p>
+<p>​    <a href="https://www.cnblogs.com/shang-slam/p/6733322.html" target="_blank" rel="noopener">ORB-SLAM跑通笔记本摄像头</a>、<a href="http://wiki.ros.org/camera_calibration/Tutorials/" target="_blank" rel="noopener">ros相机标定</a>、<a href="https://www.cnblogs.com/kekeoutlook/p/7693645.html" target="_blank" rel="noopener">相机标定</a></p>
+<p>⑤ <strong>安装kinect V1驱动</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libfreenect-dev</span><br><span class="line">sudo apt-get install ros-kinetic-freenect-*</span><br><span class="line"></span><br><span class="line">sudo apt-get install ros-kinetic-rqt*</span><br><span class="line"><span class="meta">#</span><span class="bash">安装后需要使用下列命令进行更新</span></span><br><span class="line">rospack profile</span><br></pre></td></tr></table></figure>
+<p>   修改<code>ros_mono.cc</code>进入<code>catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/src</code> 打开<code>ros_mono.cc</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据不同的相机订阅不同的话题名称</span></span><br><span class="line">ros::Subscriber sub = nodeHandler.subscribe(<span class="string">"/camera/image_raw"</span>,<span class="number">1</span>,&amp;ImageGrabber::GrabImage,&amp;igb);</span><br><span class="line"><span class="comment">//将/camera/image_raw改为/camera/rgb/image_raw</span></span><br><span class="line">ros::Subscriber sub = nodeHandler.subscribe(<span class="string">"/camera/rgb/image_raw"</span>,<span class="number">1</span>,&amp;ImageGrabber::GrabImage,&amp;igb);</span><br><span class="line"><span class="comment">//或/camera/image_raw改为usb_cam/image_raw</span></span><br><span class="line">ros::Subscriber sub = nodeHandler.subscribe(<span class="string">"/usb_cam/image_raw"</span>,<span class="number">1</span>,&amp;ImageGrabber::GrabImage,&amp;igb);</span><br></pre></td></tr></table></figure>
+<p>   重新编译</p>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./build_ros.sh</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>⑥ <strong>tum数据集解释及下载</strong></p>
+<p><a href="https://www.cnblogs.com/gaoxiang12/p/5175118.html" target="_blank" rel="noopener">关于TUM数据集</a>、<a href="https://vision.in.tum.de/data/datasets/rgbd-dataset/download" target="_blank" rel="noopener">rgbd数据集下载</a>、<a href="https://vision.in.tum.de/data/datasets/rgbd-dataset/tools" target="_blank" rel="noopener">associate.py官方下载及详解</a></p>
+<p>⑦ <strong>演示</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">一、首先演示orbslam2 跑数据集   工作路径~/Workspace/catkin_ws/src/ORB_SLAM2</span></span><br><span class="line">xyz</span><br><span class="line">./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TUM1.yaml Data/rgbd_dataset_freiburg1_xyz</span><br><span class="line"></span><br><span class="line">room</span><br><span class="line">./Examples/Monocular/mono_tum Vocabulary/ORBvoc.txt Examples/Monocular/TUM1.yaml Data/rgbd_dataset_freiburg1_room</span><br><span class="line"></span><br><span class="line">rgb-d</span><br><span class="line">./Examples/RGB-D/rgbd_tum Vocabulary/ORBvoc.txt Examples/RGB-D/TUM2.yaml Data/rgbd_dataset_freiburg2_pioneer_360 Examples/RGB-D/associations.txt</span><br><span class="line"><span class="meta">#</span><span class="bash">其中associations.txt需要单独处理 工作路径~/Workspace/catkin_ws/src/ORB_SLAM2/Eaxmples/RGB<span class="_">-d</span></span></span><br><span class="line">python associate.py ../../Data/rgbd_dataset_freiburg2_pioneer_360/rgb.txt ../../Data/rgbd_dataset_freiburg2_pioneer_360/depth.txt &gt; associations.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">二、演示相机标定	工作路径~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> roscore</span></span><br><span class="line"><span class="meta">#</span><span class="bash">可以在.launch文件里修改要用的摄像头，比如笔记本的摄像头是/dev/video0,外接USB摄像头是/dev/video1</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> roslaunch usb_cam usb_cam-test.launch </span></span><br><span class="line"><span class="meta">#</span><span class="bash">这里参数要与打印的模板一致 8x6</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.035 image:=/usb_cam/image_raw camera:=/usb_cam </span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">得到文件相机标定数据 camrea.yaml 并进行编写yaml</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">三、演示实时定位	工作路径~</span></span><br><span class="line"><span class="meta">#</span><span class="bash">构图演示</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> roscore</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> roslaunch usb_cam usb_cam-test.launch</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> roslaunch freenect_launch freenect-xyz.launch </span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rosrun ORB_SLAM2 Mono ~/Workspace/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt  ~/Workspace/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/my.yaml </span></span><br><span class="line"><span class="meta">#</span><span class="bash">AR演示</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> rosrun ORB_SLAM2 MonoAR ~/Workspace/catkin_ws/src/ORB_SLAM2/Vocabulary/ORBvoc.txt  ~/catkin_ws/src/ORB_SLAM2/Examples/ROS/ORB_SLAM2/my.yaml</span></span><br></pre></td></tr></table></figure>
+<p>⑧ <strong>若要添加外部库文件.so链接</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(LIBS </span><br><span class="line"><span class="variable">$&#123;OpenCV_LIBS&#125;</span> </span><br><span class="line"><span class="variable">$&#123;EIGEN3_LIBS&#125;</span></span><br><span class="line"><span class="variable">$&#123;Pangolin_LIBRARIES&#125;</span></span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../../../Thirdparty/DBoW2/lib/libDBoW2.so</span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../../../Thirdparty/g2o/lib/libg2o.so</span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../../../lib/libORB_SLAM2.so</span><br><span class="line"></span><br><span class="line">)</span><br><span class="line"><span class="comment">#添加下辺两句</span></span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../../../lib/libboost_filesystem.so </span><br><span class="line"><span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/../../../lib/libboost_system.so</span><br><span class="line"></span><br><span class="line"><span class="comment">#对应的库文件放在对应的目录下</span></span><br></pre></td></tr></table></figure>
+<p>⑨ <strong>若要添加外部.cpp文件</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#cmakelists文件最下边添加</span></span><br><span class="line"><span class="comment">#gaoxiang demo</span></span><br><span class="line"><span class="keyword">add_executable</span>(myvideo </span><br><span class="line">Examples/Monocular/myvideo.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(myvideo <span class="variable">$&#123;PROJECT_NAME&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#gaoxiang demo</span></span><br><span class="line"><span class="keyword">add_executable</span>(myslam </span><br><span class="line">Examples/Monocular/myslam.cpp)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(myslam <span class="variable">$&#123;PROJECT_NAME&#125;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#外部myslam.cpp myvideo.cpp内目录路径需要更改</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/zhangqian_shai/article/details/88406981" target="_blank" rel="noopener">详细流程</a>、<a href="https://www.cnblogs.com/1228073191Blog/p/10729357.html" target="_blank" rel="noopener">详细流程2</a></p>
+<hr>
+<h3 id="运行技巧"><a href="#运行技巧" class="headerlink" title="运行技巧"></a>运行技巧</h3><ul>
+<li>请尽量在<strong>光照充足、纹理丰富</strong>的场合下运行程序。如果默认参数不合适，你也可以尝试<strong>换一些参数</strong>。</li>
+<li><strong>为什么跑数据集时老是出现跟踪失败？</strong></li>
+</ul>
+<p>​     本人在使用Example.bag时并未出现什么问题，然而在运行自己的数据集时，常常会出现Tracking失败的现象，而且通常是开始时都没问题，运行一段时间后出现的。将数据集中的图片打开感觉前后帧变化不大啊，后来测了一下程序每步执行的时间，稍微看了一下他的代码实现，大致的推论是这样的： </p>
+<p>​    1）在用rosbag发布图像时，很多时候都用的30帧每秒的发送速率，然而电脑性能未特别好的情况下，是不能及时处理的，因此读取图像端可能会出现丢帧现象，导致图像不连续，造成跟踪失败； </p>
+<p>​    2）ORB_SLAM在程序执行时，多个线程共享同一份地图关键帧，造成每个线程可能运行的时间不固定，这个也是导致不能及时处理图片的一个原因吧。 </p>
+<p>​    <strong>解决方法</strong>：一般跑代码的人是先想看看代码的功能性，效率可以作为接下来考量的东西，因此最简单的办法是将rosbag发布的帧率调低或调到很低，具体方法是在使用<a href="(https://github.com/raulmur/BagFromImages">BagFromImages</a>)工具打包时将帧率参数设置为比较小的数值，而不是通常地30帧。</p>
+<ul>
+<li><strong>为什么跑文献中那个kitti最大场景（sequence 00）的结果与文献中给出的不一致？</strong></li>
+</ul>
+<p>​    可能对于比较小的数据集出现个跟踪失败现象使用将图像发布速度降低的方法能解决一部分问题，然而想跑一个大场景的数据集时，比如说文献中那个比较庞大的数据集时，发现前面跑的还好，后面咋就还是由于跟踪失败，导致在回到之前到过场景之前地图一直处于丢失状态.<br>​    开始时本人也是相当困惑的，后来一想ORB_SLAM使用的多线程，资源共享机制还有增量式地图会导致两个因素：一是算法时间不稳定，二是对内存的消耗会越来越大，一旦真实的物理内存用尽了，大家都知道Linux会使用交换分区作为内存的扩展空间，这样的话程序的执行效率会降低不少的，后来通过系统监视器发现4G的内存根本就不够他用，最后通过加了个4G内存然后将图片发布速度控制到很低的帧率，慢吞吞的跑完，达到作者所描述的效果.</p>
+<ul>
+<li><strong>设置自己相机相关参数</strong></li>
+</ul>
+<hr>
+<h3 id="错误调试"><a href="#错误调试" class="headerlink" title="错误调试"></a>错误调试</h3><h4 id="opencv错误"><a href="#opencv错误" class="headerlink" title="opencv错误"></a><strong>opencv错误</strong></h4><p>① <strong>无法打开包括文件: “opencv2/xfeatures2d/cuda.hpp”:</strong> </p>
+<p>​    解决方法：<a href="https://blog.csdn.net/gbz3300255/article/details/90240912" target="_blank" rel="noopener">文件的相对路径/网络路径改为绝对路径</a></p>
+<p>② <strong>网络原因下载不到的boostdesc_bgm.i文件缺少</strong></p>
+<p>​    解决方法：<a href="https://blog.csdn.net/AlexWang30/article/details/99612188" target="_blank" rel="noopener">换源下载</a></p>
+<p>③ <strong>CMake Error: CUDA_nppi_LIBRARY (ADVANCED)</strong> </p>
+<p>​    解决方法1：<a href="https://blog.csdn.net/dawn_chen121/article/details/82828629" target="_blank" rel="noopener">cmake添加参数</a></p>
+<p>​    解决方法2：<a href="https://blog.csdn.net/qq_40755643/article/details/96437720" target="_blank" rel="noopener">cuda9不再支持2.0架构</a></p>
+<hr>
+<h4 id="orbslam2错误"><a href="#orbslam2错误" class="headerlink" title="orbslam2错误"></a><strong>orbslam2错误</strong></h4><p>① <strong>. /usr/local/lib/libopencv_highgui.so：对‘TIFFIsTiled@LIBTIFF_4.0’未定义的引用</strong></p>
+<p>​    解决步骤1：<a href="http://www.voidcn.com/article/p-mrofikyf-mo.html" target="_blank" rel="noopener">opencv编译时添加参数</a></p>
+<p>​    解决步骤2：<a href="https://blog.csdn.net/zbr794866300/article/details/100527658" target="_blank" rel="noopener">将<code>FIND_PACKAGE(OpenCV  REQUIRED)</code>强加上指定版本<code>FIND_PACKAGE(OpenCV 3.2.0REQUIRED)</code></a></p>
+<p>​    解决步骤3：<a href="https://blog.csdn.net/weixin_39752599/article/details/88142117" target="_blank" rel="noopener">由于ros在Kinect的版本中自带了opencv3（通过ros-kinect-opencv3安装）</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove ros-kinetic-opencv3</span><br><span class="line">sudo apt-get install ros-kinetic-desktop-full</span><br></pre></td></tr></table></figure>
+<p>​    解决步骤4：.bashrc问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">查看路径</span></span><br><span class="line">echo $ROS_PACKAGE_PATH</span><br><span class="line">echo $PATH</span><br><span class="line">echo $PYTHONPATH</span><br><span class="line"></span><br><span class="line">/usr/local/cuda-10.1/bin:/usr/local/anaconda3/bin:/usr/local/anaconda3/condabin:/opt/ros/kinetic/bin:/home/duan/bin:/home/duan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删除anoconda</span></span><br><span class="line">export PATH=/home/duan/bin:/home/duan/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin</span><br></pre></td></tr></table></figure>
+<p>② <strong>rospack found package “ORB_SLAM2” at”/opt/ros/kinetic/share/ORB_SLAM2”</strong></p>
+<p>​    解决方法：<a href="https://blog.csdn.net/weixin_44401286/article/details/102752767" target="_blank" rel="noopener">https://blog.csdn.net/weixin_44401286/article/details/102752767</a></p>
+<p>③ <strong>更换python版本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config python</span><br><span class="line">conda deactivate  #退出conda环境</span><br></pre></td></tr></table></figure>
+<p>④<strong>程序“catkin_init_workspace”尚未安装，程序“catkin_make”尚未安装。</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /opt/ros/kinetic/setup.bash</span><br></pre></td></tr></table></figure>
+<p>⑤<strong>No module named rospkg</strong></p>
+<p>​    解决方法： <a href="https://answers.ros.org/question/39657/importerror-no-module-named-rospkg/" target="_blank" rel="noopener">https://answers.ros.org/question/39657/importerror-no-module-named-rospkg/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">发生此错误的原因是因为/opt中的Python软件包已添加到PYTHONPATH环境变量BUT中的/usr中，而PYTHONPATH变量中不存在路径。python-rospkg默认安装在/usr中。</span><br><span class="line">因此，您只需要在.bashrc中执行以下代码即可解决此问题：</span><br><span class="line">export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/dist-packages</span><br></pre></td></tr></table></figure>
+<p>⑥<strong>pip-  AttributeError: module ‘enum’ has no attribute ‘IntFlag’</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/.bashrc文件下注释所有与PYTHONPATH有关的东西</span><br></pre></td></tr></table></figure>
+<p>⑦<strong>报错路径带anaconda卸载anaconda</strong></p>
+<p>​    解决方法： <a href="https://www.cnblogs.com/cord/p/9226641.html" target="_blank" rel="noopener">https://www.cnblogs.com/cord/p/9226641.html</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda install anaconda-clean</span><br><span class="line">anaconda-clean --yes</span><br><span class="line">rm -rf /anaconda/anaconda3</span><br></pre></td></tr></table></figure>
+<p>⑧<strong>出现已删除的路径</strong></p>
+<p>​    解决方法： 说明编译依赖库时使用到此删除文件的功能，需要对依赖库进行重新编译</p>
+<p>⑨<strong>需要找东西时</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">locate boost_system    #一般找文件</span><br><span class="line">whereis boost_system   #一般找命令</span><br></pre></td></tr></table></figure>
+<p>⑩<strong>Undefined reference to symbol ‘_ZN5boost6system15system_categoryEv’</strong></p>
+<p>​    解决方法： <a href="https://github.com/raulmur/ORB_SLAM2/issues/494" target="_blank" rel="noopener">https://github.com/raulmur/ORB_SLAM2/issues/494</a></p>
+<hr>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SLAM-Practice/" rel="tag"><i class="fa fa-tag"></i> SLAM-Practice</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/22/Vim/" rel="prev" title="Vim">
+      <i class="fa fa-chevron-left"></i> Vim
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#熟悉Linux"><span class="nav-number">1.</span> <span class="nav-text">熟悉Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展资料"><span class="nav-number">1.1.</span> <span class="nav-text">扩展资料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FHS标准"><span class="nav-number">1.2.</span> <span class="nav-text">FHS标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三层目录-root-usr-var"><span class="nav-number">1.3.</span> <span class="nav-text">三层目录&#x2F;root&#x2F;usr&#x2F;var</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux目录结构"><span class="nav-number">1.4.</span> <span class="nav-text">linux目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SLAM综述文献阅读"><span class="nav-number">2.</span> <span class="nav-text">SLAM综述文献阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMake练习"><span class="nav-number">3.</span> <span class="nav-text">CMake练习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#答案"><span class="nav-number">3.2.</span> <span class="nav-text">答案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ORB-SLAM2"><span class="nav-number">4.</span> <span class="nav-text">ORB-SLAM2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用摄像头或视频运行ORB-SLAM2"><span class="nav-number">5.</span> <span class="nav-text">使用摄像头或视频运行ORB-SLAM2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文档"><span class="nav-number">5.1.</span> <span class="nav-text">参考文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译"><span class="nav-number">5.2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行"><span class="nav-number">5.3.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行技巧"><span class="nav-number">5.4.</span> <span class="nav-text">运行技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误调试"><span class="nav-number">5.5.</span> <span class="nav-text">错误调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#opencv错误"><span class="nav-number">5.5.1.</span> <span class="nav-text">opencv错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orbslam2错误"><span class="nav-number">5.5.2.</span> <span class="nav-text">orbslam2错误</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Duan"
+      src="/images/sdz.jpg">
+  <p class="site-author-name" itemprop="name">Duan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/duanyaqi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;duanyaqi" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://wpa.qq.com/msgrd?v=1&uin=837738300&site=ioshenmue&menu=yes" title="QQ → https:&#x2F;&#x2F;wpa.qq.com&#x2F;msgrd?v&#x3D;1&amp;uin&#x3D;837738300&amp;site&#x3D;ioshenmue&amp;menu&#x3D;yes" rel="noopener" target="_blank"><i class="fa fa-fw fa-qq"></i>QQ</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:duanyaqiduanyaqi@gmail.com" title="E-Mail → mailto:duanyaqiduanyaqi@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+      
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      	<h3 class="widget-title">Tag Cloud</h3>
+    	<div id="myCanvasContainer" class="widget tagcloud">
+       		<canvas width="250" height="250" id="resCanvas" style="width:100%">
+            		<ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blog/" rel="tag">Blog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMake/" rel="tag">CMake</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Course14/" rel="tag">Course14</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM/" rel="tag">SLAM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SLAM-Practice/" rel="tag">SLAM-Practice</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/" rel="tag">vim</a><span class="tag-list-count">1</span></li></ul>
+        	</canvas>
+       	</div>
+     </div>
+     
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Duan</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="Symbols count total">41k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">37 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
+  </div>
+
+<div class="powered-by">
+    <span class="post-meta-divider">|</span>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <i class="fa fa-user-md"></i>
+    <span id="busuanzi_container_site_uv">
+        <span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_container_site_pv">
+        <span id="busuanzi_value_site_pv"></span>
+    </span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+</body>
+</html>
